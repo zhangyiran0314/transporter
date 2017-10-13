@@ -16,12 +16,6 @@ public class ConstantsConfig {
 	@Value("${upload.filePath}")
 	private String filePath;
 	
-	@Value("${repetition.collect}")
-	private boolean collect;
-	
-	@Value("${repetition.filter}")
-	private boolean filter;
-	
 	/**
 	 * 打印�?��常量配置是否正确
 	 */
@@ -29,8 +23,6 @@ public class ConstantsConfig {
 	public void PostConstruct(){
 		System.out.println("####################application.yml config start####################");
 		System.out.println("upload.filePath value:"+filePath);
-		System.out.println("repetition.collect value:"+collect);
-		System.out.println("repetition.filter value:"+filter);
 		
 		System.out.println("####################application.yml config end####################");
 	}
@@ -39,12 +31,4 @@ public class ConstantsConfig {
 		return filePath;
 	}
 
-	public boolean isCollect() {
-		return collect;
-	}
-
-	public boolean isFilter() {
-		return filter;
-	}
-	
 }

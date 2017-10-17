@@ -46,7 +46,7 @@
 				var username = $('#username').val();
 		        var password = $('#password').val();
 		        $.ajax({
-		        	url:"<%=request.getContextPath()%>/sys/submitLogin",
+		        	url:"<%=request.getContextPath()%>/login",
 		        	data:{pswd:password,email:username},
 		        	type:"post",
 		        	dataType:"json",
@@ -62,7 +62,7 @@
 			    			layer.msg('登录成功！');
 			    			setTimeout(function(){
 			    				//登录返回
-				    			window.location.href= result.back_url || "${basePath}/";
+				    			window.location.href= result.back_url || "<%=request.getContextPath()%>";
 			    			},1000)
 			    		}
 		        	},

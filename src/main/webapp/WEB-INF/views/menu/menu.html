@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>用户总数--layui后台管理模板</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" href="../../layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="../../js/ztree/css/zTreeStyle/zTreeStyle.css" media="all" />
+		<style>
+			ul.ztree {
+				margin-top: 0px;
+			    border: 1px solid #ddd;
+			    background: #fff;
+			    width: 100%;
+			    height: 360px;
+			    overflow-y: auto;
+			    overflow-x: auto;
+			    margin-bottom: 20px;
+			    border-radius: 5px;
+			}
+		</style>
+		
+	</head>
+
+	<body class="childrenBody">
+		<blockquote class="layui-elem-quote news_search layui-form ">
+			<div class="layui-inline">
+				<button type="button " class="layui-btn layui-btn-small " onclick="addForm() ">添加菜单</button>
+			</div>
+		</blockquote>
+
+		<div class="body-content">
+			<div class="layui-row">
+				<div class="layui-col-md2">
+					<div class="menuLeft">
+						<ul id="tree2" class="ztree treeAll"></ul>
+						<div style="text-align: center; id=" caozuo ">
+							<button type="button " class="layui-btn layui-btn-small " onclick="addForm() ">子节点</button>
+							<button type="button " class="layui-btn layui-btn-small layui-btn-normal " onclick="addForm() ">编辑</button>
+							<button type="button " class="layui-btn layui-btn-small layui-btn-danger " onclick="del()">删除</button>
+						</div>
+					</div>
+				</div>
+				<div class="layui-col-md1">
+					&nbsp;
+				</div>
+				<div class="layui-col-md8">
+					
+					<!-- 初次进入 S -->
+					<div id="nullForm">
+						<img src="../../images/face.jpg"/>
+					</div>
+					<!-- 初次进入 E -->
+				
+					<!-- 菜单新增 S -->
+					<div class="layui-form " id="addForm" style="display: none;">
+					  	<form class="layui-form " style="width:50%; ">
+							<div class="layui-form-item ">
+								<label class="layui-form-label ">菜单名称</label>
+								<div class="layui-input-block ">
+									<input type="text " class="layui-input  " lay-verify="required " placeholder="请输入菜单名称 ">
+								</div>
+							</div>
+							<div class="layui-form-item ">
+								<label class="layui-form-label ">菜单Url</label>
+								<div class="layui-input-block ">
+									<input type="text " class="layui-input  " lay-verify="required " placeholder="请输入菜单Url ">
+								</div>
+							</div>
+							<div class="layui-form-item ">
+								<label class="layui-form-label ">菜单编码</label>
+								<div class="layui-input-block ">
+									<input type="text " class="layui-input  " lay-verify="required " placeholder="请输入菜单编码 ">
+								</div>
+							</div>
+							<div class="layui-form-item ">
+								<label class="layui-form-label ">菜单描述</label>
+								<div class="layui-input-block ">
+									<input type="text " class="layui-input  " lay-verify="required " placeholder="请输入菜单描述 ">
+								</div>
+							</div>
+						    
+							<div class="layui-form-item ">
+								<div class="layui-input-block ">
+									<button class="layui-btn " lay-submit=" " lay-filter="addRole ">立即提交</button>
+									<button type="reset " class="layui-btn layui-btn-primary ">重置</button>
+							    </div>
+							</div>
+						</form>
+					</div>
+					<!-- 菜单新增  E -->
+					
+					<!-- 菜单查看 S -->
+					<div id="seeForm" style="display: none;" >
+						<form class="registerform" style="width:50%; ">
+				           	<div class="layui-form-item ">
+								<label class="layui-form-label ">菜单名称</label>
+								<div class="layui-form-mid layui-word-aux">组织管理</div>
+							</div>
+							<div class="layui-form-item ">
+								<label class="layui-form-label ">菜单Url</label>
+								<div class="layui-form-mid layui-word-aux">page/depart/allDeparts.html</div>
+							</div>
+							<div class="layui-form-item ">
+								<label class="layui-form-label ">菜单编码</label>
+								<div class="layui-form-mid layui-word-aux">11</div>
+							</div>
+							<div class="layui-form-item ">
+								<label class="layui-form-label ">创建时间</label>
+								<div class="layui-form-mid layui-word-aux">2017-01-01</div>
+							</div>
+							<div class="layui-form-item ">
+								<label class="layui-form-label ">菜单描述</label>
+								<div class="layui-form-mid layui-word-aux">组织管理组织管理组织管理组织管理组织管理组织管理</div>
+							</div>
+				        </form>
+					</div> 
+					<!--菜单查看 E -->
+				
+				
+				</div>
+			</div>
+		</div>
+		
+	
+	
+	<script type="text/javascript " src="../../layui/layui.js "></script>
+	<script type="text/javascript " src="../../js/ztree/jquery-1.4.4.min.js "></script>
+	<script type="text/javascript " src="../../js/ztree/jquery.ztree.core-3.5.min.js "></script>
+	<script type="text/javascript " src="../../js/ztree/jquery.ztree.excheck-3.5.min.js "></script>
+		<script>
+		
+ 
+
+			//树形组织树插件初始化
+			$(function() {
+				$.fn.zTree.init($("#tree2"), setting, zNodes);
+			});
+			var setting = {
+				data: {
+						simpleData: {
+							enable: true}
+						},
+	            callback:{
+	                onClick: onClick}
+			};
+
+			var zNodes =[
+				{name: "后台首页",id:1, pId:0},
+				{name: "管理", pId:0,id:2, children: [
+					{name: "部门管理",id:3,pId:2},
+					{name: "角色管理",id:3,pId:2}
+				]}
+			];
+			
+			function onClick(event, treeId, treeNode) {
+				//alert(treeNode.id );
+				$("#caozuo").show(500);
+				$("#nullForm").hide(100);
+				$("#addForm").hide(100);
+				$("#seeForm").show(500);
+			}	
+			
+			function addForm(){
+				$("#caozuo").hide(100);
+				$("#nullForm").hide(100);
+				$("#seeForm").hide(100);
+				$("#addForm").show(500);
+			}
+			
+			layui.use('layer', function(){ //独立版的layer无需执行这一句
+			    var $ = layui.jquery, 
+			    layer = layui.layer; //独立版的layer无需执行这一句
+			});
+			  
+			function del(){
+				layer.confirm('你确定要删除吗？', {
+					  btn: ['确定','取消'] //按钮
+					}, function(){
+					  layer.msg('好的', {icon: 1});
+					}, function(){
+					  
+					});
+			}
+	
+		</script>
+</body>
+</html>

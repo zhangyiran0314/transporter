@@ -24,28 +24,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.ifly.transporter.common.controller.BaseController;
-import com.ifly.transporter.shiro.ShiroRealm;
-import com.ifly.transporter.shiro.ShiroToken;
 import com.ifly.transporter.shiro.TokenManager;
 import com.ifly.transporter.sys.bean.UUser;
-import com.ifly.transporter.utils.UserUtil;
 import com.ifly.transporter.utils.VerifyCodeUtils;
-import com.ifly.transporter.utils.ViewUtil;
 
 @Controller
-@RequestMapping("/sys")
 public class LoginController extends BaseController{
 
+    @RequestMapping(value="/login",method=RequestMethod.GET)
+    public String loginPage(Model model){
+        return "login";
+    }
 	/**
-	 * 到登陆页面
+	 * 登陆页面
 	 * @return
 	 */
-	@RequestMapping(value="submitLogin",method=RequestMethod.POST)
+	@RequestMapping(value="/login",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> submitLogin(UUser user,Boolean rememberMe,HttpServletRequest request){
+	public Map<String,Object> login(UUser user,Boolean rememberMe,HttpServletRequest request){
 		
 		try {
 			/* String username = user.getEmail();
@@ -69,7 +67,7 @@ public class LoginController extends BaseController{
 			logger.info( "获取登录之前的URL:{}",url);
 			//如果登录之前没有地址，那么就跳转到首页。
 			if(StringUtils.isBlank(url)){
-				url = request.getContextPath() + "/user/index.shtml";
+				url = request.getContextPath() + "/index";
 			}
 			//跳转地址
 			resultMap.put("back_url", url);
@@ -107,168 +105,22 @@ public class LoginController extends BaseController{
         int w = 120, h = 40;  
         VerifyCodeUtils.outputImage(w, h, response.getOutputStream(), verifyCode);  
     }
-
-	/**
-	 * 登陆失败
-	 * @param userName
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value="login",method = RequestMethod.POST)
-	public ModelAndView fail(@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String userName, Model model) {
-		if(UserUtil.getUser()!=null){
-			return ViewUtil.redirect("/sys/index");
-		}
-		model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, userName);
-		 return ViewUtil.forward("/sys/login");
-	}
-
-	/**
-	 * index 页面(这里的权限是必须的，否则会导致权限认证的不会激发)
-	 * @return
-	 */
-	@RequestMapping(value="index",method = RequestMethod.GET)
-	@RequiresPermissions("sys:index")
-	public ModelAndView index(HttpServletRequest request) {
-		//String redirectUrl=null;
-		request.getSession(false).setMaxInactiveInterval(3600*8);//Session超时时间设置为8小时
-		//if((redirectUrl=(String)request.getSession().getAttribute("redirectUrl"))!=null){
-		//	request.getSession().removeAttribute("redirectUrl");
-			
-			//return new ModelAndView("redirect:"+redirectUrl);
-		//}
-		//return ViewUtil.forward("/sys/index");
-
-//		Subject subject = SecurityUtils.getSubject();  
-//		Object obj = subject.getPrincipal();
-//		
-//        HttpSession session = request.getSession(true);  
-//        String randCode =  (String) session.getAttribute("randCode");  
-//        String userName =  request.getParameter("username");
-		return ViewUtil.forward("/sys/agent/agentIndex");
-	}
-	
-	/**
-	 * index 页面
-	 * @return
-	 */
-	@RequestMapping(value="top",method = RequestMethod.GET)
-	@RequiresPermissions("sys:index")
-	public ModelAndView top() {
-		return ViewUtil.forward("/sys/top");
-	}
-	
-	/**
-	 * 坐席index 页面
-	 * @return
-	 */
-	@RequestMapping(value="agent/agentTop",method = RequestMethod.GET)
-	@RequiresPermissions("sys:index")
-	public ModelAndView agentTop() {
-		return ViewUtil.forward("/sys/agent/agentTop");
-	}
-	
-	/**
-	 * 坐席index 页面
-	 * @return
-	 */
-	@RequestMapping(value="agent/agentLeft",method = RequestMethod.GET)
-	@RequiresPermissions("sys:index")
-	public ModelAndView agentLeft() {
-		return ViewUtil.forward("/sys/agent/leftframe");
-	}
-	
-	/**
-	 * 坐席index 页面
-	 * @return
-	 */
-	@RequestMapping(value="agent/mainframe",method = RequestMethod.GET)
-	@RequiresPermissions("sys:index")
-	public ModelAndView mainframe() {
-		return ViewUtil.forward("/sys/agent/mainframe");
-	}
-	
-	/**
-	 * 坐席index 页面
-	 * @return
-	 */
-	@RequestMapping(value="agent/switchTopBottom",method = RequestMethod.GET)
-	@RequiresPermissions("sys:index")
-	public ModelAndView switchTopBottom() {
-		return ViewUtil.forward("/customer/customerCompanyInfo/switchTopBottom");
-	}
-	
-	/**
-	 * 坐席index 页面
-	 * @return
-	 */
-	@RequestMapping(value="agent/bottom",method = RequestMethod.GET)
-	@RequiresPermissions("sys:index")
-	public ModelAndView bottom() {
-		return ViewUtil.forward("/sys/agent/bottom");
-	}
-	/**
-	 * 坐席index 页面
-	 * @return
-	 */
-	@RequestMapping(value="agent/switchframe",method = RequestMethod.GET)
-	@RequiresPermissions("sys:index")
-	public ModelAndView switchframe() {
-		return ViewUtil.forward("/sys/agent/switchframe");
-	}
-	/**
-	 * index 页面
-	 * @return
-	 */
-	@RequestMapping(value="left",method = RequestMethod.GET)
-	@RequiresPermissions("sys:index")
-	public ModelAndView left() {
-		return ViewUtil.forward("/sys/left");
-	}
-	
-	/**
-	 * index 页面
-	 * @return
-	 */
-	@RequestMapping(value="right",method = RequestMethod.GET)
-	@RequiresPermissions("sys:index")
-	public ModelAndView right() {
-		return ViewUtil.forward("/sys/right");
-	}
-	
-	/**
-	 * index 页面
-	 * @return
-	 */
-	@RequestMapping(value="mid",method = RequestMethod.GET)
-	@RequiresPermissions("sys:index")
-	public ModelAndView mid() {
-		return ViewUtil.forward("/sys/mid");
-	}
-
-	/**
-	 * 退出系统
-	 * @return
-	 */
-	@RequestMapping(value="logout",method=RequestMethod.GET)
-	public ModelAndView logout(){
-		try
-		{
-//			shiroRealm.clearCachedAuthorizationInfo(UserUtil.getUser());
-			Subject user = SecurityUtils.getSubject();  
-			user.logout();
-			//UserUtil.logout();
-		}
-		catch(Exception e)
-		{
-			return new ModelAndView("redirect:/");
-		}
-
-		return new ModelAndView("redirect:/");
-	}
-	
-	@Autowired(required=false)
-	private ShiroRealm shiroRealm;
-	
-	
+    /**
+     * 首页
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/index",method=RequestMethod.GET)
+    public String index(){
+        return "index";
+    }
+    /**
+     * 首页
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/",method=RequestMethod.GET)
+    public String loginPage(){
+        return "login";
+    }
 }

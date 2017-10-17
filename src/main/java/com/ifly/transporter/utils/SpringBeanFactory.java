@@ -4,15 +4,17 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
-public class SpringContextUtil implements ApplicationContextAware {
+@Component
+public class SpringBeanFactory implements ApplicationContextAware {
 	private static ApplicationContext applicationContext; 
 
 	// 实现
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext)
 			throws BeansException {
-		SpringContextUtil.applicationContext = applicationContext;
+		SpringBeanFactory.applicationContext = applicationContext;
 	}
 
 	public static ApplicationContext getApplicationContext() {
@@ -25,6 +27,10 @@ public class SpringContextUtil implements ApplicationContextAware {
 		} catch (Exception e) {
 			throw new RuntimeException("获取的Bean不存在！");
 		}
+	}
+	public static <T> T getBean(Class<T> requiredType)
+			throws BeansException {
+		return applicationContext.getBean(requiredType);
 	}
 
 	public static <T> T getBean(String name, Class<T> requiredType)

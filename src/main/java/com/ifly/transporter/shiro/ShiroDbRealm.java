@@ -59,7 +59,7 @@ public class ShiroDbRealm extends ShiroRealm{
 			userService.updateByPrimaryKeySelective(user);
 		}
 //		return new SimpleAuthenticationInfo(user,user.getPswd(), getName());
-		return new  SimpleAuthenticationInfo(new ShiroUser(user.getId(),user.getNickname(),user.getEmail()),                                                                                   
+		return new  SimpleAuthenticationInfo(user,                                                                                   
 		        user.getPswd(),                                                                                                                               
 		        ByteSource.Util.bytes(password.getSalt()), getName()); 
 	}
@@ -68,7 +68,7 @@ public class ShiroDbRealm extends ShiroRealm{
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
+		UUser shiroUser = (UUser) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo info =  new SimpleAuthorizationInfo();
 		//根据用户ID查询角色（role），放入到Authorization里。
 		Set<String> roles = roleService.findRoleByUserId(shiroUser.getId());

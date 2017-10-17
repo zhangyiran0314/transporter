@@ -5,6 +5,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 
+import com.ifly.transporter.sys.bean.UUser;
+
 
 public abstract class ShiroRealm extends AuthorizingRealm{
 	
@@ -17,7 +19,7 @@ public abstract class ShiroRealm extends AuthorizingRealm{
 		matcher.setHashIterations(1024);
 		setCredentialsMatcher(matcher); 
 	}
-	public void clearCachedAuthorizationInfo(ShiroUser principal) {
+	public void clearCachedAuthorizationInfo(UUser principal) {
 		SimplePrincipalCollection principals = new SimplePrincipalCollection(principal, getName());     
 	    clearCachedAuthorizationInfo(principals);                   
 	}
@@ -26,7 +28,7 @@ public abstract class ShiroRealm extends AuthorizingRealm{
 		super.clearCachedAuthorizationInfo(principalCollection);
 	}
 
-	public void exit(ShiroUser user) {
+	public void exit(UUser user) {
 	}
 
 	public void onLogout(PrincipalCollection principalCollection) {

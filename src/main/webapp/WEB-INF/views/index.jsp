@@ -14,9 +14,9 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
-	<link rel="icon" href="favicon.ico">
+	<link rel="icon" href="<%=request.getContextPath()%>/favicon.ico">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" media="all" />
-	<link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
+	<!-- <link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" /> -->
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" media="all" />
 </head>
 <body class="main_body">

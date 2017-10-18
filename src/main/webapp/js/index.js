@@ -6,6 +6,9 @@ layui.config({
 		layer = layui.layer,
 		element = layui.element();
 		$ = layui.jquery;
+		
+		alert(GetUrlRelativePath());
+		
 		tab = layui.bodyTab({
 			openTabNum : "50",  //最大可打开窗口数量
 			url : "json/navs.json" //获取菜单json地址
@@ -157,3 +160,17 @@ function addTab(_this){
 	tab.tabAdd(_this);
 }
 
+function GetUrlRelativePath()
+{
+	var url = document.location.toString();
+	var arrUrl = url.split("//");
+	
+//	var start = arrUrl[1].indexOf("/");
+	var relUrl = arrUrl[1].split("/")[1];
+//	var relUrl = arrUrl[1].substring(start);// stop省略，截取从start开始到结尾的所有字符
+//
+//	if (relUrl.indexOf("//") != -1) {
+//		relUrl = relUrl.split("//")[0];
+//	}
+	return relUrl;
+}

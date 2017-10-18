@@ -22,4 +22,6 @@ public interface UPermissionMapper {
 	List<UPermissionBo> selectPermissionById(Long id);
 	//根据用户ID获取权限的Set集合
 	Set<String> findPermissionByUserId(Long id);
+	
+	List<UPermission> findMenusByUserId(Long userId);
 }

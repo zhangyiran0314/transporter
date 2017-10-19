@@ -5,6 +5,9 @@ function navBar(strData){
 	}else{
 		data = strData;
 	}	
+	if(data.status !=undefined && data.status ==200){
+		data = data.list;
+	}
 	var ulHtml = '<ul class="layui-nav layui-nav-tree">';
 	for(var i=0;i<data.length;i++){
 		if(data[i].spread){

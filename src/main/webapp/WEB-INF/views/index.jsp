@@ -41,7 +41,7 @@
 						</dl>
 					</li>
 					<li class="layui-nav-item" >
-			    		<a href="<%=request.getContextPath()%>/login/login.html" class="signOut"><i class="iconfont icon-loginout"></i> 退出</a>
+			    		<a href="<%=request.getContextPath()%>/logout" class="signOut"><i class="iconfont icon-loginout"></i> 退出</a>
 			    	</li>
 				</ul>
 			</div>
@@ -72,7 +72,7 @@
 				</ul>
 				<div class="layui-tab-content clildFrame">
 					<div class="layui-tab-item layui-show">
-						<iframe src="<%=request.getContextPath()%>/main.html"></iframe>
+						<iframe src="<%=request.getContextPath()%>/main"></iframe>
 					</div>
 				</div>
 			</div>

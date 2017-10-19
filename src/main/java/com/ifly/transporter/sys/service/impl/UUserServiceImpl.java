@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ifly.transporter.sys.bean.UUser;
 import com.ifly.transporter.sys.bean.UUserRole;
 import com.ifly.transporter.sys.bo.URoleBo;
@@ -76,12 +78,16 @@ public class UUserServiceImpl  implements UUserService {
 		return userMapper.findUserByEmail(email);
 	}
 
-	/*@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	@Override
-	public Pagination<UUser> findByPage(Map<String, Object> resultMap,
+	public PageInfo<UUser> queryPage(Map<String, Object> resultMap,
 			Integer pageNo, Integer pageSize) {
-		return super.findPage(resultMap, pageNo, pageSize);
-	}*/
+		if(pageNo!= null && pageSize!= null){  
+            PageHelper.startPage(pageNo, pageSize);  
+        }  
+		List<UUser> list= userMapper.findAll();
+		return new PageInfo<UUser>(list);
+	}
 
 	@Override
 	public Map<String, Object> deleteUserById(String ids) {
@@ -128,13 +134,6 @@ public class UUserServiceImpl  implements UUserService {
 		}
 		return resultMap;
 	}
-
-	/*@SuppressWarnings("unchecked")
-	@Override
-	public Pagination<UserRoleAllocationBo> findUserAndRole(ModelMap modelMap,
-			Integer pageNo, Integer pageSize) {
-		return super.findPage("findUserAndRole", "findCount", modelMap, pageNo, pageSize);
-	}*/
 
 	@Override
 	public List<URoleBo> selectRoleByUserId(Long id) {
@@ -194,6 +193,12 @@ public class UUserServiceImpl  implements UUserService {
 		}
 		return resultMap;
 	
+	}
+
+	@Override
+	public PageInfo<UserRoleAllocationBo> findUserAndRole(ModelMap modelMap, Integer pageNo, Integer pageSize) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

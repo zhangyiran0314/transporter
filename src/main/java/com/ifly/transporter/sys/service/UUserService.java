@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.ui.ModelMap;
 
+import com.github.pagehelper.PageInfo;
 import com.ifly.transporter.sys.bean.UUser;
 import com.ifly.transporter.sys.bo.URoleBo;
 import com.ifly.transporter.sys.bo.UserRoleAllocationBo;
@@ -26,16 +27,16 @@ public interface UUserService {
     UUser login(String email ,String pswd);
 
 	UUser findUserByEmail(String email);
-/*
-	Pagination<UUser> findByPage(Map<String, Object> resultMap, Integer pageNo,
+
+	PageInfo<UUser> queryPage(Map<String, Object> resultMap, Integer pageNo,
 			Integer pageSize);
-*/
+
 	Map<String, Object> deleteUserById(String ids);
 
 	Map<String, Object> updateForbidUserById(Long id, Long status);
 
-	/*Pagination<UserRoleAllocationBo> findUserAndRole(ModelMap modelMap,
-			Integer pageNo, Integer pageSize);*/
+	PageInfo<UserRoleAllocationBo> findUserAndRole(ModelMap modelMap,
+			Integer pageNo, Integer pageSize);
 
 	List<URoleBo> selectRoleByUserId(Long id);
 

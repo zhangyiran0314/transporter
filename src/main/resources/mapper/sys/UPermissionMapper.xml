@@ -73,8 +73,8 @@
 		where uid =#{id,jdbcType=BIGINT} and p.id = rp.pid and rp.rid = ur.rid
   </select>
    <!-- 根据用ID查询permission -->
-  <select id="findMenusByUserId" resultMap="BaseResultMap">
-  		select p.id as id,p.name as name,p.url as url from sys_permission p , sys_role_permission rp, sys_user_role ur 
+  <select id="findMenusByUserId" resultType ="java.util.HashMap">
+  		select p.id as id,p.name as title,p.url as href from sys_permission p , sys_role_permission rp, sys_user_role ur 
 		where uid =#{id,jdbcType=BIGINT} and p.id = rp.pid and rp.rid = ur.rid
   </select>
   

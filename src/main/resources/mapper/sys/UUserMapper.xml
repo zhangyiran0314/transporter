@@ -33,8 +33,8 @@
   	 select 
     <include refid="Base_Column_List" />
     from sys_user 
-    <include refid="where_all"/>
-    <include refid="limit_sql" />
+  <!--   <include refid="where_all"/>
+    <include refid="limit_sql" /> -->
   </select>
   <select id="findCount" resultMap="BaseResultMap" >
  	 select count(id) from  sys_user

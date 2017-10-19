@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ifly.transporter.common.controller.BaseController;
 import com.ifly.transporter.shiro.TokenManager;
 import com.ifly.transporter.sys.bean.UUser;
+import com.ifly.transporter.utils.LoggerUtils;
 import com.ifly.transporter.utils.VerifyCodeUtils;
 
 @Controller
@@ -123,4 +124,27 @@ public class LoginController extends BaseController{
     public String loginPage(){
         return "login";
     }
+    /**
+     * 首页
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/main",method=RequestMethod.GET)
+    public String mainPage(){
+        return "main";
+    }
+    /**
+	 * 退出
+	 * @return
+	 */
+	@RequestMapping(value="/logout",method =RequestMethod.GET)
+	public String logout(){
+		try {
+			TokenManager.logout();
+		} catch (Exception e) {
+			logger.error("errorMessage:" + e.getMessage());
+			LoggerUtils.fmtError(getClass(), e, "退出出现错误，%s。", e.getMessage());
+		}
+		return "login";
+	}
 }

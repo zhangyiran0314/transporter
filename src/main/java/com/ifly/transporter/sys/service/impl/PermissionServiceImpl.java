@@ -9,11 +9,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ifly.transporter.sys.bean.UPermission;
-import com.ifly.transporter.sys.bean.URolePermission;
-import com.ifly.transporter.sys.bo.UPermissionBo;
-import com.ifly.transporter.sys.mapper.UPermissionMapper;
-import com.ifly.transporter.sys.mapper.URolePermissionMapper;
+import com.ifly.transporter.sys.bean.UMenu;
+import com.ifly.transporter.sys.bean.URoleMenu;
+import com.ifly.transporter.sys.bo.UMenuBo;
+import com.ifly.transporter.sys.mapper.UMenuMapper;
+import com.ifly.transporter.sys.mapper.URoleMenuMapper;
 import com.ifly.transporter.sys.mapper.UUserMapper;
 import com.ifly.transporter.sys.mapper.UUserRoleMapper;
 import com.ifly.transporter.sys.service.PermissionService;
@@ -22,11 +22,11 @@ import com.ifly.transporter.utils.LoggerUtils;
 public class PermissionServiceImpl implements PermissionService {
 
 	@Autowired
-	UPermissionMapper permissionMapper;
+	UMenuMapper permissionMapper;
 	@Autowired
 	UUserMapper userMapper;
 	@Autowired
-	URolePermissionMapper rolePermissionMapper;
+	URoleMenuMapper rolePermissionMapper;
 	@Autowired
 	UUserRoleMapper userRoleMapper;
 	
@@ -36,13 +36,13 @@ public class PermissionServiceImpl implements PermissionService {
 	}
 
 	@Override
-	public UPermission insert(UPermission record) {
+	public UMenu insert(UMenu record) {
 		permissionMapper.insert(record);
 		return record;
 	}
 
 	@Override
-	public UPermission insertSelective(UPermission record) {
+	public UMenu insertSelective(UMenu record) {
 		//添加权限
 		permissionMapper.insertSelective(record);
 		//每添加一个权限，都往【系统管理员 	888888】里添加一次。保证系统管理员有最大的权限
@@ -51,17 +51,17 @@ public class PermissionServiceImpl implements PermissionService {
 	}
 
 	@Override
-	public UPermission selectByPrimaryKey(Long id) {
+	public UMenu selectByPrimaryKey(Long id) {
 		return permissionMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public int updateByPrimaryKey(UPermission record) {
+	public int updateByPrimaryKey(UMenu record) {
 		return permissionMapper.updateByPrimaryKey(record);
 	}
 
 	@Override
-	public int updateByPrimaryKeySelective(UPermission record) {
+	public int updateByPrimaryKeySelective(UMenu record) {
 		return permissionMapper.updateByPrimaryKeySelective(record);
 	}
 
@@ -81,7 +81,7 @@ public class PermissionServiceImpl implements PermissionService {
 			for (String idx : idArray) {
 				Long id = new Long(idx);
 				
-				List<URolePermission> rolePermissions= rolePermissionMapper.findRolePermissionByPid(id);
+				List<URoleMenu> rolePermissions= rolePermissionMapper.findRolePermissionByPid(id);
 				if(null != rolePermissions && rolePermissions.size() > 0){
 					errorCount += rolePermissions.size();
 				}else{
@@ -112,7 +112,7 @@ public class PermissionServiceImpl implements PermissionService {
 	}*/
 
 	@Override
-	public List<UPermissionBo> selectPermissionById(Long id) {
+	public List<UMenuBo> selectPermissionById(Long id) {
 		return permissionMapper.selectPermissionById(id);
 	}
 
@@ -146,7 +146,7 @@ public class PermissionServiceImpl implements PermissionService {
 				for (String pid : idArray) {
 					//这里严谨点可以判断，也可以不判断。这个{@link StringUtils 我是重写了的} 
 					if(StringUtils.isNotBlank(pid)){
-						URolePermission entity = new URolePermission(roleId,new Long(pid));
+						URoleMenu entity = new URoleMenu(roleId,new Long(pid));
 						count += rolePermissionMapper.insertSelective(entity);
 					}
 				}

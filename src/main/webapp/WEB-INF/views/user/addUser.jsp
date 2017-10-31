@@ -13,7 +13,7 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="format-detection" content="telephone=no">
-	<link rel="stylesheet" href="../../layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/layui/css/layui.css" media="all" />
 	<style type="text/css">
 		.layui-form-item .layui-inline{ width:33.333%; float:left; margin-right:0; }
 		@media(max-width:1240px){
@@ -35,15 +35,15 @@
 				<input type="text" class="layui-input userEmail"  placeholder="请输入邮箱">
 			</div>
 		</div>
-		<div class="layui-form-item">
+		<!-- <div class="layui-form-item">
 		    <label class="layui-form-label">角色</label>
 		    <div class="layui-input-block userRole">
 		    	<input type="checkbox" name="role" value="管理员" title="管理员">
 			    <input type="checkbox" name="role" value="高级用户" title="高级用户">
 		    </div>
-		</div>
+		</div> -->
 		
-	    <div class="layui-form-item">
+	   <!--  <div class="layui-form-item">
 		    <label class="layui-form-label">所属部门</label>
 			<div class="layui-input-block">
 				<select name="userDepart" class="userDepart" lay-filter="userDepart">
@@ -53,8 +53,8 @@
 			        <option value="3">硬件部</option>
 			    </select>
 			</div>
-	    </div>
-	    <div class="layui-form-item">
+	    </div> -->
+	   <!--  <div class="layui-form-item">
 		    <label class="layui-form-label">人员状态</label>
 			<div class="layui-input-block">
 				<select name="userStatus" class="userStatus" lay-filter="userStatus">
@@ -62,7 +62,7 @@
 					<option value="1">限制用户</option>
 			    </select>
 			</div>
-	    </div>
+	    </div> -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">人员描述</label>
 			<div class="layui-input-block">
@@ -76,7 +76,7 @@
 		    </div>
 		</div>
 	</form>
-	<script type="text/javascript" src="../../layui/layui.js"></script>
-	<script type="text/javascript" src="addUser.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/layui/layui.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/user/addUser.js"></script>
 </body>
 </html>

@@ -15,12 +15,12 @@ layui.config({
 
 	
 
-	//用户数
-	$.get("../json/usersList.json",
+	/*//用户数
+	$.get("user/usersList.json",
 		function(data){
 			$(".userAll span").text(data.length);
 		}
-	)
+	)*/
 
 	
 
@@ -31,19 +31,19 @@ layui.config({
 	})
 
 	//系统基本参数
-	if(window.sessionStorage.getItem("systemParameter")){
+	/*if(window.sessionStorage.getItem("systemParameter")){
 		var systemParameter = JSON.parse(window.sessionStorage.getItem("systemParameter"));
 		fillParameter(systemParameter);
 	}else{
 		$.ajax({
-			url : "../json/systemParameter.json",
+			url : "../user/systemParameter.json",
 			type : "get",
 			dataType : "json",
 			success : function(data){
 				fillParameter(data);
 			}
 		})
-	}
+	}*/
 
 	//填充数据方法
  	function fillParameter(data){

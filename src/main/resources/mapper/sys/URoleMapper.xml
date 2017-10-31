@@ -74,11 +74,11 @@
   </select>
   
   <!-- 权限分配的分页查询 -->
-  <select id="findRoleAndPermission" resultType="com.ifly.transporter.sys.bo.RolePermissionAllocationBo">
-  	select ur.id,ur.type,ur.name,group_concat(up.name) permissionNames,group_concat(up.id)permissionIds from 
+  <select id="findRoleAndMenu" resultType="com.ifly.transporter.sys.bo.RoleMenuAllocationBo">
+  	select ur.id,ur.type,ur.name,group_concat(up.name) menuNames,group_concat(up.id)menuIds from 
 	sys_role ur 
-	left join sys_role_permission urp on urp.rid = ur.id
-	left join sys_permission up on up.id = urp.pid
+	left join sys_role_menu urp on urp.rid = ur.id
+	left join sys_menu up on up.id = urp.pid
 	<where>
 		<if test="findContent != null and findContent !='' " >
 	        and (
@@ -93,21 +93,21 @@
   
   <!-- Mybatis 一对多 Demo  begin -->
   
-  <!-- 查询用户全部的role & permission -->
-  <resultMap id="findNowAllPermission_resultMap" extends="BaseResultMap" type="com.ifly.transporter.sys.bean.URole" >
-  	<collection property="permissions" javaType="com.ifly.transporter.sys.bean.UPermission">
+  <!-- 查询用户全部的role & menu -->
+  <resultMap id="findNowAllMenu_resultMap" extends="BaseResultMap" type="com.ifly.transporter.sys.bean.URole" >
+  	<collection property="menus" javaType="com.ifly.transporter.sys.bean.UMenu">
   	 	<id column="pid" property="id" jdbcType="BIGINT" />
     	<result column="pname" property="name" jdbcType="VARCHAR" />
     	<result column="url" property="url" jdbcType="VARCHAR" />
   	</collection>
   </resultMap>
   <!-- 根据用户ID，查询所有权限 -->
-  <select id="findNowAllPermission" resultMap="findNowAllPermission_resultMap">
+  <select id="findNowAllMenu" resultMap="findNowAllMenu_resultMap">
 	select ur.id,ur.name,ur.type ,up.id pid,up.url,up.name pname 
 		from (select rid from sys_user_role where uid = #{userId,jdbcType=BIGINT}) uur 
 		left join sys_role ur on uur.rid = ur.id
-		left join sys_role_permission urp on urp.rid = ur.id
-		left join sys_permission up on up.id = urp.pid
+		left join sys_role_menu urp on urp.rid = ur.id
+		left join sys_menu up on up.id = urp.pid
   </select>
    <!-- Mybatis 一对多 Demo  end -->
    

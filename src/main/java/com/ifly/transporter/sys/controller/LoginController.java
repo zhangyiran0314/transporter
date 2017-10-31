@@ -4,6 +4,7 @@ package com.ifly.transporter.sys.controller;
 
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,29 +12,25 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ifly.transporter.common.controller.BaseController;
 import com.ifly.transporter.shiro.TokenManager;
 import com.ifly.transporter.sys.bean.UUser;
 import com.ifly.transporter.utils.LoggerUtils;
 import com.ifly.transporter.utils.VerifyCodeUtils;
 
 @Controller
-public class LoginController extends BaseController{
-
+public class LoginController{
+	private static Logger logger = LoggerFactory.getLogger(LoginController.class);
+	
     @RequestMapping(value="/login",method=RequestMethod.GET)
     public String loginPage(Model model){
         return "login";
@@ -45,7 +42,7 @@ public class LoginController extends BaseController{
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> login(UUser user,Boolean rememberMe,HttpServletRequest request){
-		
+		 Map<String,Object> resultMap = new HashMap<String,Object>();
 		try {
 			/* String username = user.getEmail();
 	        ShiroToken token = new ShiroToken(user.getEmail(), user.getPswd());

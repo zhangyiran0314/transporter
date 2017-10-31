@@ -80,8 +80,7 @@ public class UUserServiceImpl  implements UUserService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public PageInfo<UUser> queryPage(Map<String, Object> resultMap,
-			Integer pageNo, Integer pageSize) {
+	public PageInfo<UUser> queryPage(Integer pageNo, Integer pageSize) {
 		if(pageNo!= null && pageSize!= null){  
             PageHelper.startPage(pageNo, pageSize);  
         }  

@@ -4,28 +4,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.ifly.transporter.sys.bean.UPermission;
-import com.ifly.transporter.sys.bo.UPermissionBo;
+import com.ifly.transporter.sys.bean.UMenu;
+import com.ifly.transporter.sys.bo.UMenuBo;
 
 public interface PermissionService {
 
 	int deleteByPrimaryKey(Long id);
 
-	UPermission insert(UPermission record);
+	UMenu insert(UMenu record);
 
-    UPermission insertSelective(UPermission record);
+    UMenu insertSelective(UMenu record);
 
-    UPermission selectByPrimaryKey(Long id);
+    UMenu selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(UPermission record);
+    int updateByPrimaryKeySelective(UMenu record);
 
-    int updateByPrimaryKey(UPermission record);
+    int updateByPrimaryKey(UMenu record);
 
 	Map<String, Object> deletePermissionById(String ids);
 
 	/*Pagination<UPermission> findPage(Map<String,Object> resultMap, Integer pageNo,
 			Integer pageSize);*/
-	List<UPermissionBo> selectPermissionById(Long id);
+	List<UMenuBo> selectPermissionById(Long id);
 
 	Map<String, Object> addPermission2Role(Long roleId,String ids);
 

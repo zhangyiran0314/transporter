@@ -87,32 +87,32 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		return stringHttpMessageConverter;
 	}
 	/**
-	 * 定义拦截器参数解析做动�?国际�?--start
+	 * 定义拦截器参数解析做动�?国际�?--start
 	 * locale=cn_zh
 	 * locale=en_us
 	 * 特别注意:
-	 * 定义LocaleChangeInterceptor拦截器时,必须结合定义�?��CookieLocaleResolver或�?SessionLocaleResolver
+	 * 定义LocaleChangeInterceptor拦截器时,必须结合定义�?��CookieLocaleResolver或�?SessionLocaleResolver
 	 * 且名称必须为localeResolver
 	 */
 	@Bean
 	public LocaleChangeInterceptor localeChangeInterceptor() {
 		LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
-		// 设置请求地址的参�?默认为：locale 
+		// 设置请求地址的参�?默认为：locale 
 		lci.setParamName(LocaleChangeInterceptor.DEFAULT_PARAM_NAME);
 		return lci;
 	}
-	//此处localeResolver名称必须为localeResolver,否则不生�?	@Bean  
+	//此处localeResolver名称必须为localeResolver,否则不生�?	@Bean  
     public LocaleResolver localeResolver() {  
         CookieLocaleResolver cl = new CookieLocaleResolver();  
         cl.setCookieName("language");  
         return cl;  
     }  
 	/**
-	 * 定义拦截器参数解析做动�?国际�?--end
+	 * 定义拦截器参数解析做动�?国际�?--end
 	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/sts","/index","/login");
+		registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/index","/login","/api");
 		registry.addInterceptor(localeChangeInterceptor());
 	}
 }

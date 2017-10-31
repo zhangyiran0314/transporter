@@ -2,6 +2,7 @@ package com.ifly.transporter.utils;
 
 public class PasswordUtil {
 
+	public static final String DEFAULT_PASSWORD = "123456";
 	public static final int HASH_INTERATIONS = 1024;
 	public static final int SALT_SIZE =8;
 	

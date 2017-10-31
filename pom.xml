@@ -141,6 +141,12 @@
 		    <version>18.0</version>
 		</dependency>
 
+		<!-- jwt -->
+		<dependency>  
+		    <groupId>io.jsonwebtoken</groupId>  
+		    <artifactId>jjwt</artifactId>  
+		    <version>0.6.0</version>  
+		</dependency>  
   </dependencies>
   
    <build>

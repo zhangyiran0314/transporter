@@ -34,7 +34,7 @@ public class URole  implements Serializable{
     /**角色类型*/
     private String type;
     //***做 role --> permission 一对多处理
-    private List<UPermission> permissions = new LinkedList<UPermission>();
+    private List<UMenu> permissions = new LinkedList<UMenu>();
     
     public Long getId() {
         return id;
@@ -56,11 +56,11 @@ public class URole  implements Serializable{
         return type;
     }
 
-    public List<UPermission> getPermissions() {
+    public List<UMenu> getPermissions() {
 		return permissions;
 	}
 
-	public void setPermissions(List<UPermission> permissions) {
+	public void setPermissions(List<UMenu> permissions) {
 		this.permissions = permissions;
 	}
 

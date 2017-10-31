@@ -15,7 +15,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.ifly.transporter.shiro.MShiroFilterFactoryBean;
+import com.ifly.transporter.shiro.PermissionFilter;
 import com.ifly.transporter.shiro.ShiroDbRealm;
+import javax.servlet.Filter;
 
 @Configuration
 public class ShiroConfig {
@@ -64,16 +66,19 @@ public class ShiroConfig {
     private void loadShiroFilterChain(ShiroFilterFactoryBean shiroFilterFactoryBean){
         /////////////////////// 下面这些规则配置最好配置到配置文件中 ///////////////////////
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-        // authc：该过滤器下的页面必须验证后才能访问，它是Shiro内置的一个拦截器org.apache.shiro.web.filter.authc.FormAuthenticationFilter
-        filterChainDefinitionMap.put("/user", "authc");// 这里为了测试，只限制/user，实际开发中请修改为具体拦截的请求规则
-        filterChainDefinitionMap.put("/menu", "authc");// 这里为了测试，只限制/user，实际开发中请修改为具体拦截的请求规则
-        filterChainDefinitionMap.put("/index", "authc");// 这里为了测试，只限制/user，实际开发中请修改为具体拦截的请求规则
+       /* Map<String,Filter> filterMap = new LinkedHashMap<>();
+        filterMap.put("perms",permissionFilter());
+        shiroFilterFactoryBean.setFilters(filterMap);*/
+        
+//        filterChainDefinitionMap.put("/user", "authc");
+        filterChainDefinitionMap.put("/user", "authc");
+        filterChainDefinitionMap.put("/menu", "authc");
+        filterChainDefinitionMap.put("/index", "authc");
         // anon：它对应的过滤器里面是空的,什么都没做
-        LOGGER.info("##################从数据库读取权限规则，加载到shiroFilter中##################");
-
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/**", "anon");//anon 可以理解为不拦截
-
+     
+        
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
     }
     @Bean(name = "shiroFilter")
@@ -90,5 +95,10 @@ public class ShiroConfig {
 
         loadShiroFilterChain(shiroFilterFactoryBean);
         return shiroFilterFactoryBean;
+    }
+    @Bean
+    public PermissionFilter permissionFilter()
+    {
+        return new PermissionFilter();
     }
 }

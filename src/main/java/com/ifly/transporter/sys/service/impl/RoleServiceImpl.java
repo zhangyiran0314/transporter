@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ifly.transporter.sys.bean.URole;
-import com.ifly.transporter.sys.bo.RolePermissionAllocationBo;
+import com.ifly.transporter.sys.bo.RoleMenuAllocationBo;
 import com.ifly.transporter.sys.mapper.URoleMapper;
-import com.ifly.transporter.sys.mapper.URolePermissionMapper;
+import com.ifly.transporter.sys.mapper.URoleMenuMapper;
 import com.ifly.transporter.sys.mapper.UUserMapper;
 import com.ifly.transporter.sys.service.RoleService;
 import com.ifly.transporter.utils.LoggerUtils;
@@ -26,7 +26,7 @@ public class RoleServiceImpl  implements RoleService {
 	@Autowired
 	UUserMapper userMapper;
 	@Autowired
-	URolePermissionMapper rolePermissionMapper;
+	URoleMenuMapper rolePermissionMapper;
 
 	@Override
 	public int deleteByPrimaryKey(Long id) {

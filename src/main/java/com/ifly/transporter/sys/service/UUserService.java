@@ -28,7 +28,7 @@ public interface UUserService {
 
 	UUser findUserByEmail(String email);
 
-	PageInfo<UUser> queryPage(Map<String, Object> resultMap, Integer pageNo,
+	PageInfo<UUser> queryPage(Integer pageNo,
 			Integer pageSize);
 
 	Map<String, Object> deleteUserById(String ids);

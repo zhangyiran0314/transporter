@@ -8,5 +8,6 @@ public class UUIDUtil {
 	}
 	public static void main(String[] args){
 		System.out.println(UUIDUtil.UUID());
+		System.out.println(UUIDUtil.UUID().length());
 	}
 }

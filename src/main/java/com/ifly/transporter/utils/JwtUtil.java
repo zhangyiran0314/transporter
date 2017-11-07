@@ -54,17 +54,25 @@ public class JwtUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public static boolean parseJWT(String jwt){
-		SecretKey key = generalKey();
-		Claims claims = Jwts.parser()         
-		   .setSigningKey(key)
-		   .parseClaimsJws(jwt).getBody();
-		String subject = (String)claims.get(Claims.SUBJECT);  
-		if(subject!=null){
-			System.out.println("parseJWT json:"+subject);
-			return true;
+	public static Claims parseJWT(String jwt){
+		try{
+			SecretKey key = generalKey();
+			Claims claims = Jwts.parser()         
+			   .setSigningKey(key)
+			   .parseClaimsJws(jwt).getBody();
+			
+			if(claims!=null){
+				System.out.println("ID: " + claims.getId());
+				System.out.println("Subject: " + claims.getSubject());
+				System.out.println("Issuer: " + claims.getIssuer());
+				System.out.println("Expiration: " + claims.getExpiration());
+				return claims;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
 		}
-		return false;
+		return null;
 	}
 	
 	/**

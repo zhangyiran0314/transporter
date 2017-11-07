@@ -17,7 +17,7 @@ public class ConstantsConfig {
 	private String filePath;
 	
 	/**
-	 * 打印�?��常量配置是否正确
+	 * 打印常量配置是否正确
 	 */
 	@PostConstruct
 	public void PostConstruct(){

@@ -33,7 +33,7 @@ public class JwtFilter implements Filter{
 			if (HeadStr.compareTo("bearer") == 0) {
 
 				auth = auth.substring(7, auth.length());
-				if (JwtUtil.parseJWT(auth)) {
+				if (JwtUtil.parseJWT(auth)!=null) {
 					{
 						chain.doFilter(request, response);
 						return;

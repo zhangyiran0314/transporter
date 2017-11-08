@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ifly.transporter.common.mapper.AttachmentMapper" >
+  <resultMap id="BaseResultMap" type="com.ifly.transporter.common.bean.Attachment" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="data_status" property="dataStatus" jdbcType="SMALLINT" />
+    <result column="desp" property="desp" jdbcType="VARCHAR" />
+    <result column="attachement_link" property="attachementLink" jdbcType="VARCHAR" />
+    <result column="attachement_name" property="attachementName" jdbcType="VARCHAR" />
+    <result column="attachement_type" property="attachementType" jdbcType="VARCHAR" />
+    <result column="ref_id" property="refId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_date, update_date, data_status, desp, attachement_link, attachement_name, 
+    attachement_type, ref_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_attachment
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_attachment
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ifly.transporter.common.bean.Attachment" >
+    insert into t_attachment (id, create_date, update_date, 
+      data_status, desp, attachement_link, 
+      attachement_name, attachement_type, ref_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{dataStatus,jdbcType=SMALLINT}, #{desp,jdbcType=VARCHAR}, #{attachementLink,jdbcType=VARCHAR}, 
+      #{attachementName,jdbcType=VARCHAR}, #{attachementType,jdbcType=VARCHAR}, #{refId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ifly.transporter.common.bean.Attachment" >
+    insert into t_attachment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="dataStatus != null" >
+        data_status,
+      </if>
+      <if test="desp != null" >
+        desp,
+      </if>
+      <if test="attachementLink != null" >
+        attachement_link,
+      </if>
+      <if test="attachementName != null" >
+        attachement_name,
+      </if>
+      <if test="attachementType != null" >
+        attachement_type,
+      </if>
+      <if test="refId != null" >
+        ref_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatus != null" >
+        #{dataStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="desp != null" >
+        #{desp,jdbcType=VARCHAR},
+      </if>
+      <if test="attachementLink != null" >
+        #{attachementLink,jdbcType=VARCHAR},
+      </if>
+      <if test="attachementName != null" >
+        #{attachementName,jdbcType=VARCHAR},
+      </if>
+      <if test="attachementType != null" >
+        #{attachementType,jdbcType=VARCHAR},
+      </if>
+      <if test="refId != null" >
+        #{refId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ifly.transporter.common.bean.Attachment" >
+    update t_attachment
+    <set >
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatus != null" >
+        data_status = #{dataStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="desp != null" >
+        desp = #{desp,jdbcType=VARCHAR},
+      </if>
+      <if test="attachementLink != null" >
+        attachement_link = #{attachementLink,jdbcType=VARCHAR},
+      </if>
+      <if test="attachementName != null" >
+        attachement_name = #{attachementName,jdbcType=VARCHAR},
+      </if>
+      <if test="attachementType != null" >
+        attachement_type = #{attachementType,jdbcType=VARCHAR},
+      </if>
+      <if test="refId != null" >
+        ref_id = #{refId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ifly.transporter.common.bean.Attachment" >
+    update t_attachment
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      data_status = #{dataStatus,jdbcType=SMALLINT},
+      desp = #{desp,jdbcType=VARCHAR},
+      attachement_link = #{attachementLink,jdbcType=VARCHAR},
+      attachement_name = #{attachementName,jdbcType=VARCHAR},
+      attachement_type = #{attachementType,jdbcType=VARCHAR},
+      ref_id = #{refId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

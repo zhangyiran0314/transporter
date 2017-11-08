@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ifly.transporter.api.mapper.UserShipperMapper" >
+  <resultMap id="BaseResultMap" type="com.ifly.transporter.api.bean.UserShipper" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="data_status" property="dataStatus" jdbcType="SMALLINT" />
+    <result column="desp" property="desp" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR" />
+    <result column="last_login_date" property="lastLoginDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
+    <result column="last_login_device" property="lastLoginDevice" jdbcType="VARCHAR" />
+    <result column="company_id" property="companyId" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="attachment_id_1" property="attachmentId1" jdbcType="VARCHAR" />
+    <result column="attachment_id_2" property="attachmentId2" jdbcType="VARCHAR" />
+    <result column="attachment_id_3" property="attachmentId3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_date, update_date, data_status, desp, mobile, password, nickname, last_login_ip, 
+    last_login_date, status, last_login_device, company_id, parent_id, attachment_id_1, 
+    attachment_id_2, attachment_id_3
+  </sql>
+   <select id="selectByMobile" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_shipper
+    where mobile = #{mobile,jdbcType=VARCHAR} 
+  </select>
+  
+   <select id="selectByMobileAndPassword" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_shipper
+    where mobile = #{mobile,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_shipper
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_user_shipper
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ifly.transporter.api.bean.UserShipper" >
+    insert into t_user_shipper (id, create_date, update_date, 
+      data_status, desp, mobile, 
+      password, nickname, last_login_ip, 
+      last_login_date, status, last_login_device, 
+      company_id, parent_id, attachment_id_1, 
+      attachment_id_2, attachment_id_3)
+    values (#{id,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{dataStatus,jdbcType=SMALLINT}, #{desp,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{lastLoginIp,jdbcType=VARCHAR}, 
+      #{lastLoginDate,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT}, #{lastLoginDevice,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{attachmentId1,jdbcType=VARCHAR}, 
+      #{attachmentId2,jdbcType=VARCHAR}, #{attachmentId3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ifly.transporter.api.bean.UserShipper" >
+    insert into t_user_shipper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="dataStatus != null" >
+        data_status,
+      </if>
+      <if test="desp != null" >
+        desp,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip,
+      </if>
+      <if test="lastLoginDate != null" >
+        last_login_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lastLoginDevice != null" >
+        last_login_device,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="attachmentId1 != null" >
+        attachment_id_1,
+      </if>
+      <if test="attachmentId2 != null" >
+        attachment_id_2,
+      </if>
+      <if test="attachmentId3 != null" >
+        attachment_id_3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatus != null" >
+        #{dataStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="desp != null" >
+        #{desp,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginIp != null" >
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginDate != null" >
+        #{lastLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="lastLoginDevice != null" >
+        #{lastLoginDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentId1 != null" >
+        #{attachmentId1,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentId2 != null" >
+        #{attachmentId2,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentId3 != null" >
+        #{attachmentId3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ifly.transporter.api.bean.UserShipper" >
+    update t_user_shipper
+    <set >
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatus != null" >
+        data_status = #{dataStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="desp != null" >
+        desp = #{desp,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginDate != null" >
+        last_login_date = #{lastLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="lastLoginDevice != null" >
+        last_login_device = #{lastLoginDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentId1 != null" >
+        attachment_id_1 = #{attachmentId1,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentId2 != null" >
+        attachment_id_2 = #{attachmentId2,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentId3 != null" >
+        attachment_id_3 = #{attachmentId3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ifly.transporter.api.bean.UserShipper" >
+    update t_user_shipper
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      data_status = #{dataStatus,jdbcType=SMALLINT},
+      desp = #{desp,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      last_login_date = #{lastLoginDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT},
+      last_login_device = #{lastLoginDevice,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      attachment_id_1 = #{attachmentId1,jdbcType=VARCHAR},
+      attachment_id_2 = #{attachmentId2,jdbcType=VARCHAR},
+      attachment_id_3 = #{attachmentId3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

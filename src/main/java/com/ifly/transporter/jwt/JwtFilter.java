@@ -47,8 +47,8 @@ public class JwtFilter implements Filter{
 			httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
 			Map<String, Object> result = new HashMap<String, Object>();
-			result.put("status", 403);
-			result.put("msg", "token失效");
+			result.put("code", 403);
+			result.put("msg", "Token Invalid");
 			httpResponse.getWriter().write(JSON.toJSONString(result));
 			return;
 		}

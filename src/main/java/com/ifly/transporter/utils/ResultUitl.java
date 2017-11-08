@@ -22,6 +22,13 @@ public class ResultUitl {
 		jsonResult.put(Constanst.Data_Key, null);
 		return jsonResult.toJSONString();
 	}
+	public static String failureResult(String msg){
+		JSONObject jsonResult = new JSONObject();
+		jsonResult.put(Constanst.Code_Key,Constanst.Code_Failure);
+		jsonResult.put(Constanst.Msg_Key, msg);
+		jsonResult.put(Constanst.Data_Key, null);
+		return jsonResult.toJSONString();
+	}
 	public static String failureResult(BuzExceptionEnums e){
 		JSONObject jsonResult = new JSONObject();
 		jsonResult.put(Constanst.Code_Key,e.getCode());

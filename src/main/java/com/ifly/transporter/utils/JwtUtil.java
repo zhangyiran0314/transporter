@@ -16,6 +16,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JwtUtil {
+	
 	private static String JWT_SECRET="zhangsan";
 	
 	public static final int JWT_TTL = 60*60*1000;  //millisecond
@@ -33,6 +34,27 @@ public class JwtUtil {
 		SecretKey key = generalKey();
 		JwtBuilder builder = Jwts.builder()
 				.setSubject(name)
+				.setIssuedAt(now)
+				.signWith(signatureAlgorithm, key);
+		if (ttlMillis >= 0) {
+		    long expMillis = nowMillis + ttlMillis;
+		    Date exp = new Date(expMillis);
+		    builder.setExpiration(exp);
+		}
+		return builder.compact();
+	}
+	/**
+	 * 创建jwt
+	 * @param name 用户名
+	 * @return
+	 */
+	public static String createJWT(JwtUser user,long ttlMillis ){
+		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+		long nowMillis = System.currentTimeMillis();
+		Date now = new Date(nowMillis);
+		SecretKey key = generalKey();
+		JwtBuilder builder = Jwts.builder()
+				.setSubject(generalSubject(user))
 				.setIssuedAt(now)
 				.signWith(signatureAlgorithm, key);
 		if (ttlMillis >= 0) {
@@ -79,11 +101,31 @@ public class JwtUtil {
 	 * 生成subject信息
 	 * @param user
 	 * @return
-	 *//*
-	public static String generalSubject(User user){
+	 */
+	public static String generalSubject(JwtUser user){
 		JSONObject jo = new JSONObject();
-		jo.put("userId", user.getUserId());
-		jo.put("roleId", user.getRoleId());
+		jo.put("userId", user.userId);
+		jo.put("mobile", user.mobile);
+		jo.put("device", user.device);
 		return jo.toJSONString();
-	}*/
+	}
+	public static class  JwtUser{
+		public String userId;
+		public String mobile;
+		public String password;
+		public String device;
+		
+		public JwtUser(String userId,String mobile, String password, String device) {
+			this.userId = userId; 
+			this.mobile = mobile;
+			this.password = password;
+			this.device = device;
+		}
+
+		@Override
+		public String toString() {
+			return "userId:"+ userId + ", mobile:"+ mobile +",device:"+ device ;
+		}
+		
+	}
 }

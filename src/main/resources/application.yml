@@ -27,7 +27,7 @@ spring:
        min-idle : 0
 #配置文件相关目录
 upload:
-    filePath: D:/data/
+    filePath: D:/data/ifly
     
 
 
